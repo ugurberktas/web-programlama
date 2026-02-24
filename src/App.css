@@ -1,46 +1,339 @@
-* {
+/* ── RESET & TEMEL ── */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background-color: #f0f2f5;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
+:root {
+  --renk-ana: #2563eb;
+  --renk-ana-koyu: #1d4ed8;
+  --renk-metin: #1e293b;
+  --renk-metin-acik: #64748b;
+  --renk-arka: #f8fafc;
+  --renk-kart: #ffffff;
+  --renk-sinir: #e2e8f0;
+  --renk-hata: #dc2626;
+  --font: 'Segoe UI', system-ui, sans-serif;
+  --gecis: 0.2s ease;
 }
 
-#root {
-  min-height: 100vh;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--renk-arka);
+  color: var(--renk-metin);
+  line-height: 1.7;
+}
+
+/* ── SKIP LINK (a11y) ── */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -9999px;
+  /* normalde ekran dışında */
+  background: var(--renk-ana);
+  color: #fff;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top var(--gecis);
+}
+
+.skip-link:focus {
+  top: 0;
+  /* Tab ile focus alınca görünür hale gelir */
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ── GENEL :focus STİLİ ── */
+:focus-visible {
+  outline: 2px solid var(--renk-ana);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── HEADER ── */
+header {
+  background: #fff;
+  border-bottom: 1px solid var(--renk-sinir);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
-div {
-  background-color: #ffffff;
-  padding: 3rem 4rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+.logo-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--renk-ana);
+  letter-spacing: -0.3px;
+}
+
+/* ── NAVİGASYON ── */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--renk-metin);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color var(--gecis);
+}
+
+nav a:hover {
+  color: var(--renk-ana);
+}
+
+/* ── MAIN ── */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* ── SECTION ORTAK ── */
+section {
+  padding: 4rem 0 2rem;
+  border-bottom: 1px solid var(--renk-sinir);
+}
+
+section:last-of-type {
+  border-bottom: none;
+}
+
+section h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--renk-metin);
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--renk-ana);
+  border-radius: 2px;
+}
+
+/* ── HAKKIMDA ── */
+.section-inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+figure img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--renk-sinir);
+  background: var(--renk-sinir);
+}
+
+figcaption {
+  font-size: 0.85rem;
+  color: var(--renk-metin-acik);
   text-align: center;
 }
 
-h1 {
-  font-size: 2rem;
+/* ── PROJELER ── */
+.projeler-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+article {
+  background: var(--renk-kart);
+  border: 1px solid var(--renk-sinir);
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: box-shadow var(--gecis), transform var(--gecis);
+}
+
+article:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+article h3 {
+  font-size: 1.2rem;
   font-weight: 700;
-  color: #1a1a2e;
-  margin-bottom: 0.5rem;
+  color: var(--renk-metin);
+  margin-bottom: 0.4rem;
 }
 
-h2 {
-  font-size: 1.3rem;
+.proje-etiket {
+  display: inline-block;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #4a90d9;
-  margin-bottom: 1.5rem;
+  color: var(--renk-ana);
+  background: #eff6ff;
+  border-radius: 999px;
+  padding: 0.2rem 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
-p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.8;
+/* ── İLETİŞİM FORMU ── */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 560px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--renk-metin);
+}
+
+label span[aria-hidden] {
+  color: var(--renk-hata);
+  margin-left: 2px;
+}
+
+input,
+select,
+textarea {
+  font-family: var(--font);
+  font-size: 0.95rem;
+  color: var(--renk-metin);
+  background: #fff;
+  border: 1.5px solid var(--renk-sinir);
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  width: 100%;
+  transition: border-color var(--gecis), box-shadow var(--gecis);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--renk-ana);
+  outline: 2px solid var(--renk-ana);
+  outline-offset: 0;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ── HATA MESAJLARI ── */
+.hata-mesaji {
+  font-size: 0.78rem;
+  color: var(--renk-hata);
+  display: none;
+}
+
+/* native browser doğrulama sonrası hata göster */
+input:user-invalid~.hata-mesaji,
+select:user-invalid~.hata-mesaji,
+textarea:user-invalid~.hata-mesaji {
+  display: block;
+}
+
+/* ── GÖNDER BUTONU ── */
+button[type='submit'] {
+  align-self: flex-start;
+  background: var(--renk-ana);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  cursor: pointer;
+  transition: background var(--gecis), transform var(--gecis);
+}
+
+button[type='submit']:hover {
+  background: var(--renk-ana-koyu);
+}
+
+button[type='submit']:active {
+  transform: scale(0.97);
+}
+
+button[type='submit']:focus-visible {
+  outline: 2px solid var(--renk-ana);
+  outline-offset: 3px;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-size: 0.85rem;
+  color: var(--renk-metin-acik);
+  border-top: 1px solid var(--renk-sinir);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .header-inner {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  nav ul {
+    gap: 1.25rem;
+  }
+
+  .section-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  section h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

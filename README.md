@@ -39,4 +39,8 @@ npm run dev
 
 ## Ekran Görüntüsü
 
-*(ekran görüntüsünü buraya ekle)*
+### Lighthouse Erişilebilirlik Skoru
+
+![Lighthouse Accessibility Score 100/100](public/lighthouse-accessibility.png)
+
+> ♿ Google Lighthouse **Accessibility skoru: 100/100**

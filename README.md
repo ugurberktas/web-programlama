@@ -37,6 +37,3 @@ npm run dev
 
 ---
 
-## Ekran Görüntüsü
-
-*(ekran görüntüsünü buraya ekle)*

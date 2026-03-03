@@ -38,11 +38,21 @@ function App() {
               />
               <figcaption>Uğur Berktaş — Web Geliştirici</figcaption>
             </figure>
-            <p>
-              Merhaba! Ben Uğur Berktaş. Web Tasarımı ve Programlama alanında
-              kendini geliştiren, modern web teknolojilerine meraklı bir
-              öğrenciyim.
-            </p>
+            <div>
+              <p>
+                Merhaba! Ben Uğur Berktaş. Web Tasarımı ve Programlama alanında
+                kendini geliştiren, modern web teknolojilerine meraklı bir
+                öğrenciyim.
+              </p>
+              <ul className="skill-tags" aria-label="Teknoloji becerileri">
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript</li>
+                <li>React</li>
+                <li>TypeScript</li>
+                <li>Git</li>
+              </ul>
+            </div>
           </div>
         </section>
 

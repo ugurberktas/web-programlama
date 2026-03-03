@@ -61,23 +61,28 @@ header {
   max-width: 960px;
   margin: 0 auto;
   padding: var(--space-md) var(--space-lg);
+  /* Uygulama-4: logo ve menüyü iki yana yasla */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--space-md);
 }
 
 .logo-text {
   font-size: var(--text-lg);
   font-weight: 700;
-  color: var(--color-secondary);
+  color: var(--color-primary);
   letter-spacing: -0.3px;
+  text-decoration: none;
 }
 
 /* ── NAVİGASYON ── */
 nav ul {
   list-style: none;
+  /* Uygulama-4: yatay diz, --space-md gap */
   display: flex;
-  gap: var(--space-xl);
+  flex-wrap: wrap;
+  gap: var(--space-md);
 }
 
 nav a {
@@ -85,11 +90,16 @@ nav a {
   color: var(--color-text);
   font-weight: 500;
   font-size: var(--text-sm);
-  transition: color var(--transition-fast);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
-nav a:hover {
-  color: var(--color-secondary);
+nav a:hover,
+nav a:focus-visible {
+  color: var(--color-bg);
+  background-color: var(--color-primary);
+  outline: none;
 }
 
 /* ── MAIN ── */
@@ -157,6 +167,32 @@ figcaption {
   font-size: var(--text-sm);
   color: var(--color-muted);
   text-align: center;
+}
+
+/* ── SKILL TAGS (Uygulama-5) ── */
+.skill-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  padding: 0;
+}
+
+.skill-tags li {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  line-height: 1.4;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.skill-tags li:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
 }
 
 /* ── PROJELER ── */
@@ -300,21 +336,36 @@ footer {
   border-top: 1px solid var(--color-border);
 }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 640px) {
+/* ── RESPONSIVE (Mobile-First: max-width: 639px) ── */
+@media (max-width: 639px) {
+
+  /* Uygulama-4: header dikey yığın */
   .header-inner {
     flex-direction: column;
+    align-items: flex-start;
     gap: var(--space-sm);
-    text-align: center;
   }
 
+  /* Uygulama-4: nav listesini de dikey yığın */
   nav ul {
-    gap: var(--space-lg);
+    flex-direction: column;
+    gap: var(--space-xs);
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    padding: var(--space-xs) var(--space-sm);
   }
 
   .section-inner {
     flex-direction: column;
     text-align: center;
+  }
+
+  /* Uygulama-5: mobilde etiketleri ortala */
+  .skill-tags {
+    justify-content: center;
   }
 
   section h2::after {

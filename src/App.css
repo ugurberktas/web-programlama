@@ -111,7 +111,8 @@ main {
 
 /* ── SECTION ORTAK ── */
 section {
-  padding: var(--space-3xl) 0 var(--space-xl);
+  /* Mobil varsayılan: dikey–yatay padding token'larla */
+  padding: var(--space-xl) var(--space-md);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -140,11 +141,11 @@ section h2::after {
 }
 
 /* ── HAKKIMDA ── */
-.section-inner {
+/* .about-content: tablet+ ’da yan yana, mobilde üst üste */
+.about-content {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: var(--space-xl);
-  flex-wrap: wrap;
 }
 
 figure {
@@ -157,6 +158,8 @@ figure {
 figure img {
   width: 160px;
   height: 160px;
+  /* Mobil görsel taşma engeli */
+  max-width: 100%;
   border-radius: var(--radius-full);
   object-fit: cover;
   border: 4px solid var(--color-border);
@@ -314,7 +317,8 @@ textarea:user-invalid~.hata-mesaji {
 
 /* ── GÖNDER BUTONU ── */
 button[type='submit'] {
-  align-self: flex-start;
+  /* Mobil: tam genişlik */
+  width: 100%;
   background: var(--color-secondary);
   color: #fff;
   font-family: var(--font-sans);
@@ -349,40 +353,73 @@ footer {
   border-top: 1px solid var(--color-border);
 }
 
-/* ── RESPONSIVE (Mobile-First: max-width: 639px) ── */
-@media (max-width: 639px) {
+/* ══════════════════════════════════════
+   RESPONSIVE — Mobile-First (Uygulama-7)
+   ══════════════════════════════════════ */
 
-  /* Uygulama-4: header dikey yığın */
+/* ── TABLET: min-width 640px ── */
+@media (min-width: 640px) {
+
+  /* Header yatay düzen geri gelir */
   .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-sm);
+    flex-direction: row;
+    align-items: center;
   }
 
-  /* Uygulama-4: nav listesini de dikey yığın */
   nav ul {
-    flex-direction: column;
-    gap: var(--space-xs);
-    width: 100%;
+    flex-direction: row;
+    gap: var(--space-md);
+    width: auto;
   }
 
   nav a {
-    display: block;
-    padding: var(--space-xs) var(--space-sm);
+    display: inline;
   }
 
-  .section-inner {
-    flex-direction: column;
-    text-align: center;
+  /* Hakkımda: yan yana */
+  .about-content {
+    flex-direction: row;
+    align-items: flex-start;
   }
 
-  /* Uygulama-5: mobilde etiketleri ortala */
-  .skill-tags {
-    justify-content: center;
+  /* Görsel sabit kal, metin yanına akar */
+  .about-content figure {
+    flex-shrink: 0;
+  }
+
+  /* Form butonu tam genişlikten çık */
+  button[type='submit'] {
+    width: auto;
+    align-self: flex-start;
   }
 
   section h2::after {
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    transform: none;
+  }
+}
+
+/* ── MASAÜSTÜ: min-width 1024px ── */
+@media (min-width: 1024px) {
+
+  /* Ana kapsayıcıyı ortala ve genişlet */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Section padding genişlet */
+  section {
+    padding: var(--space-3xl) var(--space-xl);
+  }
+
+  /* Grid: zorunlu 3 sütun */
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Skill tags masaüstünde sol hizalı kalır */
+  .skill-tags {
+    justify-content: flex-start;
   }
 }

@@ -28,7 +28,7 @@ function App() {
         {/* ── HAKKIMDA ── */}
         <section id="hakkimda" aria-labelledby="hakkimda-baslik">
           <h2 id="hakkimda-baslik">Hakkımda</h2>
-          <div className="section-inner">
+          <div className="about-content">
             <figure>
               <img
                 src="/profile.jpg"

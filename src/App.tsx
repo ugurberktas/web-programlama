@@ -59,24 +59,63 @@ function App() {
         {/* ── PROJELER ── */}
         <section id="projeler" aria-labelledby="projeler-baslik">
           <h2 id="projeler-baslik">Projeler</h2>
-          <div className="projeler-grid">
+          <div className="project-grid">
 
-            <article aria-labelledby="proje-reklegram">
+            <article className="project-card" aria-labelledby="proje-reklegram">
+              <img
+                src="https://placehold.co/600x200/1E3A8A/FFFFFF?text=Reklegram"
+                alt="Reklegram proje görseli"
+                width={600}
+                height={200}
+              />
               <h3 id="proje-reklegram">Reklegram</h3>
-              <p className="proje-etiket">TÜSİAD Girişim Projesi</p>
               <p>
                 Reklamcılık sektörüne yönelik yenilikçi bir dijital platform
                 girişimi. TÜSİAD iş birliğiyle hayata geçirildi.
               </p>
+              <ul className="skill-tags" aria-label="Projede kullanılan teknolojiler">
+                <li>React</li>
+                <li>TypeScript</li>
+                <li>Node.js</li>
+              </ul>
             </article>
 
-            <article aria-labelledby="proje-anchor">
+            <article className="project-card" aria-labelledby="proje-anchor">
+              <img
+                src="https://placehold.co/600x200/2563EB/FFFFFF?text=ANCHOR"
+                alt="ANCHOR proje görseli"
+                width={600}
+                height={200}
+              />
               <h3 id="proje-anchor">ANCHOR</h3>
-              <p className="proje-etiket">Garanti BBVA Projesi</p>
               <p>
                 Garanti BBVA bünyesinde geliştirilen finansal teknoloji odaklı
-                çözüm projesi.
+                çözüm projesi. Modern API entegrasyonları ile hayata geçirildi.
               </p>
+              <ul className="skill-tags" aria-label="Projede kullanılan teknolojiler">
+                <li>JavaScript</li>
+                <li>REST API</li>
+                <li>CSS3</li>
+              </ul>
+            </article>
+
+            <article className="project-card" aria-labelledby="proje-weblab">
+              <img
+                src="https://placehold.co/600x200/7C3AED/FFFFFF?text=Web+Lab"
+                alt="Web Lab proje görseli"
+                width={600}
+                height={200}
+              />
+              <h3 id="proje-weblab">Web Lab Portfolio</h3>
+              <p>
+                Web Tasarımı ve Programlama dersi kapsamında geliştirilen
+                kişisel portfolyo sitesi.
+              </p>
+              <ul className="skill-tags" aria-label="Projede kullanılan teknolojiler">
+                <li>HTML5</li>
+                <li>CSS Grid</li>
+                <li>Flexbox</li>
+              </ul>
             </article>
 
           </div>

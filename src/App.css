@@ -195,42 +195,55 @@ figcaption {
   transform: translateY(-2px);
 }
 
-/* ── PROJELER ── */
-.projeler-grid {
+/* ── PROJELER (Uygulama-6: CSS Grid) ── */
+.project-grid {
+  /* Sihirli satır: kart genişliği min 280px, maks 1fr */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
 }
 
-article {
-  background: var(--color-bg);
+.project-card {
+  /* Dikey Flexbox → p flex-grow ile alt hizalama */
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
   transition: box-shadow var(--transition-normal), transform var(--transition-normal);
 }
 
-article:hover {
+.project-card:hover {
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-  transform: translateY(-3px);
 }
 
-article h3 {
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.project-card h3 {
   font-size: var(--text-lg);
   font-weight: 700;
   color: var(--color-text);
-  margin-bottom: var(--space-xs);
+  margin: var(--space-md) var(--space-md) var(--space-xs);
 }
 
-.proje-etiket {
-  display: inline-block;
+.project-card p {
   font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--color-secondary);
-  background: #eff6ff;
-  border-radius: var(--radius-full);
-  padding: var(--space-xs) var(--space-md);
-  margin-bottom: var(--space-sm);
+  color: var(--color-muted);
+  line-height: 1.6;
+  /* flex-grow: alt kenarları eşitler */
+  flex-grow: 1;
+  margin: 0 var(--space-md) var(--space-md);
+}
+
+.project-card .skill-tags {
+  margin: 0 var(--space-md) var(--space-md);
 }
 
 /* ── İLETİŞİM FORMU ── */

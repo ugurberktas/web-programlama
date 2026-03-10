@@ -1,23 +1,13 @@
-@import './styles/tokens.css';
+@import "tailwindcss";
 
-body {
-  font-family: var(--font-sans);
-  font-size: var(--text-base);
-  color: var(--color-text);
-  background-color: var(--color-bg);
-  line-height: 1.6;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+@theme {
+  --color-primary: #1E3A8A;
+  --color-secondary: #2563EB;
+  --color-accent: #7C3AED;
+  --color-surface: #F9FAFB;
+  --color-muted: #6B7280;
+  --color-error: #DC2626;
+  --color-success: #16A34A;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+@custom-variant dark (&:where(.dark, dark *));

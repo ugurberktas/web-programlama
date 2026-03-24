@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "title": "CampusHub",
+    "description": "Üniversite topluluk yönetimi için SaaS platformu",
+    "tech": [
+      "React",
+      "Node.js"
+    ],
+    "year": 2025,
+    "category": "fullstack",
+    "featured": true,
+    "image": "/images/campushub.jpg"
+  },
+  {
+    "id": 2,
+    "title": "RailGuard",
+    "description": "Demiryolu makasları için kestirimci bakım sistemi",
+    "tech": [
+      "Python",
+      "IoT"
+    ],
+    "year": 2025,
+    "category": "backend",
+    "featured": true,
+    "image": "/images/railguard.jpg"
+  },
+  {
+    "id": 3,
+    "title": "ReklaGram",
+    "description": "AdTech & Influencer Marketing Platformu",
+    "tech": [
+      "TypeScript"
+    ],
+    "year": 2025,
+    "category": "fullstack",
+    "featured": true,
+    "image": "/images/reklagram.jpg"
+  },
+  {
+    "id": 4,
+    "title": "ANCHOR",
+    "description": "Genç kullanıcılar için erken uyarı harcama sistemi",
+    "tech": [
+      "React",
+      "Tailwind"
+    ],
+    "year": 2026,
+    "category": "frontend",
+    "featured": true,
+    "image": "/images/anchor.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Web Lab Portfolio",
+    "description": "Kişisel portföy sitesi",
+    "tech": [
+      "React",
+      "Tailwind"
+    ],
+    "year": 2026,
+    "category": "frontend",
+    "featured": true,
+    "image": "/images/weblab-portfolio.jpg"
+  }
+]

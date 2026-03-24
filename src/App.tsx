@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Project, Category, SortField, SortOrder } from './types/project';
+import { useState, useEffect } from 'react';
+import type { FC, ChangeEvent } from 'react';
+import type { Project, Category, SortField, SortOrder } from './types/project';
 import { fetchProjects } from './services/projectService';
 import { applyFilters } from './utils/projectHelpers';
 
@@ -10,7 +11,7 @@ import Card from './components/Card';
 
 const categories: (Category | 'all')[] = ['all', 'frontend', 'backend', 'fullstack'];
 
-const App: React.FC = () => {
+const App: FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [search, setSearch] = useState<string>('');
   const [category, setCategory] = useState<Category | 'all'>('all');
@@ -78,7 +79,7 @@ const App: React.FC = () => {
                 label="Proje Ara" 
                 placeholder="Başlık, açıklama veya teknoloji..." 
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
               />
             </div>
             
@@ -90,7 +91,7 @@ const App: React.FC = () => {
                 id="sort-field-select"
                 className="flex w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 dark:border-gray-700 dark:bg-gray-900 transition-colors"
                 value={sortField}
-                onChange={(e) => setSortField(e.target.value as SortField)}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => setSortField(e.target.value as SortField)}
               >
                 <option value="year">Yıl</option>
                 <option value="title">Başlık</option>
@@ -105,7 +106,7 @@ const App: React.FC = () => {
                 id="sort-order-select"
                 className="flex w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 dark:border-gray-700 dark:bg-gray-900 transition-colors"
                 value={sortOrder}
-                onChange={(e) => setSortOrder(e.target.value as SortOrder)}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => setSortOrder(e.target.value as SortOrder)}
               >
                 <option value="desc">Azalan (Yeni/Z-A)</option>
                 <option value="asc">Artan (Eski/A-Z)</option>

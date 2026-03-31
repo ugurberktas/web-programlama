@@ -1,4 +1,5 @@
 import React from 'react';
+import type { HTMLAttributes } from 'react';
 
 const variants = {
     elevated: 'bg-white dark:bg-gray-800 shadow-md',
@@ -6,7 +7,11 @@ const variants = {
     filled: 'bg-gray-50 dark:bg-gray-800/50'
 };
 
-export const Card = React.forwardRef(({
+export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+    variant?: keyof typeof variants;
+}
+
+export const Card = React.forwardRef<HTMLDivElement, CardProps>(({
     className = '',
     variant = 'elevated',
     children,

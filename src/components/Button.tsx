@@ -1,4 +1,5 @@
 import React from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 
 const variants = {
     primary: 'bg-primary text-white hover:bg-primary/90 focus:ring-primary dark:bg-primary dark:hover:bg-primary/90',
@@ -13,7 +14,12 @@ const sizes = {
     lg: 'h-12 px-6 py-3 text-base'
 };
 
-export const Button = React.forwardRef(({
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    variant?: keyof typeof variants;
+    size?: keyof typeof sizes;
+}
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
     className = '',
     variant = 'primary',
     size = 'md',

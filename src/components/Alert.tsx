@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 
 const variants = {
     info: 'bg-blue-50 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800/50',
@@ -7,7 +8,14 @@ const variants = {
     error: 'bg-error/10 text-error border-error/20 dark:bg-error/10 dark:text-error dark:border-error/20'
 };
 
-export const Alert = React.forwardRef(({
+export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
+    variant?: keyof typeof variants;
+    dismissible?: boolean;
+    onDismiss?: () => void;
+    children?: ReactNode;
+}
+
+export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(({
     className = '',
     variant = 'info',
     dismissible = false,

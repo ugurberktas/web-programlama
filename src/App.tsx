@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { FC, ChangeEvent } from 'react';
 import type { Project, Category, SortField, SortOrder } from './types/project';
 import { fetchProjects } from './services/projectService';
@@ -13,10 +13,9 @@ const categories: (Category | 'all')[] = ['all', 'frontend', 'backend', 'fullsta
 
 const App: FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [search, setSearch] = useState<string>('');
-  const [category, setCategory] = useState<Category | 'all'>('all');
-  const [sortField, setSortField] = useState<SortField>('year');
-  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [categoryFilter, setCategoryFilter] = useState<Category | 'all'>('all');
+  const [sortOption, setSortOption] = useState<string>('year-desc');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -57,12 +56,15 @@ const App: FC = () => {
     );
   }
 
-  const filteredProjects = applyFilters(projects, {
-    search,
-    category,
-    sortField,
-    sortOrder
-  });
+  const filteredProjects = useMemo(() => {
+    const [field, order] = sortOption.split('-') as [SortField, SortOrder];
+    return applyFilters(projects, {
+      search: searchQuery,
+      category: categoryFilter,
+      sortField: field,
+      sortOrder: order
+    });
+  }, [projects, searchQuery, categoryFilter, sortOption]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-4 md:p-8">
@@ -78,38 +80,25 @@ const App: FC = () => {
                 id="search-input"
                 label="Proje Ara" 
                 placeholder="Başlık, açıklama veya teknoloji..." 
-                value={search}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+                value={searchQuery}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
               />
             </div>
             
-            <div className="flex flex-col gap-1.5 flex-1">
-              <label htmlFor="sort-field-select" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Sırala (Alan)
+            <div className="flex flex-col gap-1.5 flex-1 md:col-span-2">
+              <label htmlFor="sort-option-select" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Sıralama Seçenekleri
               </label>
               <select 
-                id="sort-field-select"
+                id="sort-option-select"
                 className="flex w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 dark:border-gray-700 dark:bg-gray-900 transition-colors"
-                value={sortField}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => setSortField(e.target.value as SortField)}
+                value={sortOption}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => setSortOption(e.target.value)}
               >
-                <option value="year">Yıl</option>
-                <option value="title">Başlık</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col gap-1.5 flex-1">
-              <label htmlFor="sort-order-select" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Sırala (Yön)
-              </label>
-              <select 
-                id="sort-order-select"
-                className="flex w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 dark:border-gray-700 dark:bg-gray-900 transition-colors"
-                value={sortOrder}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => setSortOrder(e.target.value as SortOrder)}
-              >
-                <option value="desc">Azalan (Yeni/Z-A)</option>
-                <option value="asc">Artan (Eski/A-Z)</option>
+                <option value="year-desc">Yıla Göre (Yeni - Eski)</option>
+                <option value="year-asc">Yıla Göre (Eski - Yeni)</option>
+                <option value="title-asc">Başlığa Göre (A - Z)</option>
+                <option value="title-desc">Başlığa Göre (Z - A)</option>
               </select>
             </div>
           </div>
@@ -121,14 +110,14 @@ const App: FC = () => {
             <div className="flex flex-wrap gap-3">
               {categories.map(cat => (
                 <Button 
-                  key={cat}
-                  variant={category === cat ? 'primary' : 'secondary'}
-                  onClick={() => setCategory(cat)}
-                  size="sm"
-                  className={category !== cat ? 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 outline-none' : ''}
-                >
-                  {cat === 'all' ? 'Tümü' : cat.charAt(0).toUpperCase() + cat.slice(1)}
-                </Button>
+                   key={cat}
+                   variant={categoryFilter === cat ? 'primary' : 'secondary'}
+                   onClick={() => setCategoryFilter(cat)}
+                   size="sm"
+                   className={categoryFilter !== cat ? 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 outline-none' : ''}
+                 >
+                   {cat === 'all' ? 'Tümü' : cat.charAt(0).toUpperCase() + cat.slice(1)}
+                 </Button>
               ))}
             </div>
           </div>
@@ -190,10 +179,9 @@ const App: FC = () => {
             <Button 
               className="mt-6"
               onClick={() => {
-                setSearch('');
-                setCategory('all');
-                setSortField('year');
-                setSortOrder('desc');
+                setSearchQuery('');
+                setCategoryFilter('all');
+                setSortOption('year-desc');
               }}
             >
               Filtreleri Temizle

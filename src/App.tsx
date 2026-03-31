@@ -7,7 +7,7 @@ import { applyFilters } from './utils/projectHelpers';
 import Input from './components/Input';
 import Button from './components/Button';
 import Alert from './components/Alert';
-import Card from './components/Card';
+import ProjectList from './components/ProjectList';
 import ProjectForm from './components/ProjectForm';
 import type { ProjectFormData } from './components/ProjectForm';
 
@@ -140,51 +140,7 @@ const App: FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map(project => (
-            <Card key={project.id} className="flex flex-col h-full hover:shadow-lg transition-shadow duration-300 group">
-              <div className="h-48 relative overflow-hidden bg-gray-100 dark:bg-gray-800">
-                {project.image ? (
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400">Görsel Yok</div>
-                )}
-                {project.featured && (
-                  <span className="absolute top-3 right-3 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded shadow-sm">
-                    Öne Çıkan
-                  </span>
-                )}
-              </div>
-              <div className="p-5 flex flex-col flex-grow">
-                <div className="flex justify-between items-start mb-3 gap-2">
-                  <h2 className="text-xl font-bold leading-tight">{project.title}</h2>
-                  <span className="text-xs font-semibold bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 px-2.5 py-1 rounded-full whitespace-nowrap">
-                    {project.year}
-                  </span>
-                </div>
-                
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 flex-grow leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-gray-100 dark:border-gray-700/50">
-                  {project.tech.map((t, index) => (
-                    <span 
-                      key={index} 
-                      className="text-[11px] font-medium bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 px-2.5 py-1 rounded"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
+        <ProjectList projects={filteredProjects} />
         
         {!loading && !error && filteredProjects.length === 0 && (
           <div className="text-center py-20 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">

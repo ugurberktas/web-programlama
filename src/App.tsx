@@ -8,6 +8,8 @@ import Input from './components/Input';
 import Button from './components/Button';
 import Alert from './components/Alert';
 import Card from './components/Card';
+import ProjectForm from './components/ProjectForm';
+import type { ProjectFormData } from './components/ProjectForm';
 
 const categories: (Category | 'all')[] = ['all', 'frontend', 'backend', 'fullstack'];
 
@@ -39,6 +41,19 @@ const App: FC = () => {
 
     loadProjects();
   }, []);
+
+  const handleAddProject = (formData: ProjectFormData) => {
+    const newProject: Project = {
+      ...formData,
+      id: Date.now(),
+      tech: [],
+      featured: false,
+      image: ''
+    };
+    
+    // Add new project to the beginning of the list
+    setProjects(prev => [newProject, ...prev]);
+  };
 
   if (loading) {
     return (
@@ -73,6 +88,8 @@ const App: FC = () => {
           Projelerimiz
         </h1>
         
+        <ProjectForm onAddProject={handleAddProject} />
+
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm mb-10 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex flex-col gap-1.5 justify-end">
